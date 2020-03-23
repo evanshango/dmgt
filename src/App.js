@@ -4,7 +4,6 @@ import './App.css';
 import dashboard from "./pages/dashboard";
 import signin from "./pages/signin";
 import signup from "./pages/signup";
-import Navbar from "./components/layouts/Navbar";
 import createMuiTheme from "@material-ui/core/styles/createMuiTheme";
 import {ThemeProvider as MuiThemeProvider} from '@material-ui/core/styles';
 
@@ -31,7 +30,6 @@ class App extends Component {
            <MuiThemeProvider theme={theme}>
                <div className="App">
                    <Router>
-                       <Navbar/>
                        <div className="container">
                            <Switch>
                                <Route exact path='/dashboard' component={dashboard}/>

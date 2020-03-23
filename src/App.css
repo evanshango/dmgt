@@ -6,7 +6,7 @@ html, body {
 }
 
 .container{
-  margin: 80px auto 0 auto;
+  margin: 50px auto 0 auto;
 }
 
 .nav-container {
@@ -40,4 +40,8 @@ a{
   text-decoration: none;
   align-content: center;
   display: flex;
+}
+.markerIcon{
+  color: red;
+  size: 35px;
 }
