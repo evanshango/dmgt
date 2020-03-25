@@ -23,7 +23,7 @@ const styles = theme => ({
         backgroundColor: theme.palette.secondary.main,
     },
     form: {
-        width: '100%', // Fix IE 11 issue.
+        width: '100%',
         marginTop: theme.spacing(1),
     },
     submit: {
@@ -56,12 +56,12 @@ class signin extends Component {
                         </Button>
                         <Grid container>
                             <Grid item xs>
-                                <Link href="#" variant="body2">
+                                <Link to={'/'} variant="body2">
                                     Forgot password?
                                 </Link>
                             </Grid>
                             <Grid item>
-                                <Link href="#" variant="body2">
+                                <Link to={'/'} variant="body2">
                                     {"Don't have an account? Sign Up"}
                                 </Link>
                             </Grid>

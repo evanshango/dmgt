@@ -10,10 +10,6 @@ const cardStyle = {
     height: '85vh',
 };
 
-const markerColor = {
-    background: 'blue'
-};
-
 class MapContainer extends Component {
 
     state = {showInfoWindow: false, activeMarker: {}, selectedPlace: {}};

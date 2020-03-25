@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {withStyles} from "@material-ui/core";
 import SideNav from "../components/layouts/SideNav";
 import MapContainer from "../components/map/MapContainer";
+import axios from 'axios';
 
 const drawerWidth = 240;
 const styles = theme => ({
@@ -27,7 +28,7 @@ class dashboard extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {latitude: null, longitude: null, userAddress: null}
+        this.state = {latitude: null, longitude: null, userAddress: null, incidents: null}
     }
 
     componentDidMount() {
@@ -45,6 +46,10 @@ class dashboard extends Component {
         } else {
             alert('Unable to access current location')
         }
+        axios.get('/incidents').then(res => {
+            console.log(res.data)
+            this.setState({incidents: res.data})
+        }).catch(err => console.log(err))
     }
 
     fetchUserAddress = (lat, lng) => {
@@ -76,7 +81,7 @@ class dashboard extends Component {
 
     render() {
         const {classes} = this.props;
-        const {latitude, longitude} = this.state;
+        const {latitude, longitude, incidents} = this.state;
         return (
             <div className={classes.root}>
                 <SideNav/>
