@@ -1,96 +1,36 @@
 import React, {Component} from 'react';
-import {withStyles} from "@material-ui/core";
-import SideNav from "../components/layouts/SideNav";
-import MapContainer from "../components/map/MapContainer";
-import axios from 'axios';
-
-const drawerWidth = 240;
-const styles = theme => ({
-    ...theme.styling,
-    root: {
-        display: 'flex',
-    },
-    drawer: {
-        width: drawerWidth,
-        flexShrink: 0
-    },
-    drawerPaper: {
-        width: drawerWidth,
-    },
-    content: {
-        flexGrow: 1,
-        padding: theme.spacing(3),
-    },
-    toolbar: theme.mixins.toolbar,
-});
+import axios from "axios";
+import Grid from "@material-ui/core/Grid";
+import Incident from "../components/Incident";
 
 class dashboard extends Component {
 
-    constructor(props) {
-        super(props);
-        this.state = {latitude: null, longitude: null, userAddress: null, incidents: null}
-    }
+    state = {incidents: null};
 
     componentDidMount() {
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition((position, error) => {
-                if (error == null) {
-                    const lat = position.coords.latitude;
-                    const lng = position.coords.longitude;
-                    this.setState({latitude: lat, longitude: lng});
-                    this.fetchUserAddress(lat, lng);
-                } else {
-                    this.checkErrors(error)
-                }
-            });
-        } else {
-            alert('Unable to access current location')
-        }
         axios.get('/incidents').then(res => {
-            console.log(res.data)
             this.setState({incidents: res.data})
         }).catch(err => console.log(err))
     }
 
-    fetchUserAddress = (lat, lng) => {
-        fetch(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&sensor=false&key=${process.env.REACT_APP_MAP_KEY}`)
-            .then(response => response.json())
-            .then(data => {
-                // this.setState({userAddress: data.results[0].formatted_address, latitude: lat, longitude: lng})
-            }).catch(error => alert(error));
-    };
-
-    checkErrors = error => {
-        switch (error.code) {
-            case error.PERMISSION_DENIED:
-                alert('Permission to access location denied');
-                break;
-            case  error.POSITION_UNAVAILABLE:
-                alert('Location info unavailable');
-                break;
-            case error.TIMEOUT:
-                alert('Location request timed out');
-                break;
-            case error.UNKNOWN_ERR:
-                alert('An unknown error occurred');
-                break;
-            default:
-                alert('An unknown error occurred')
-        }
-    };
-
     render() {
-        const {classes} = this.props;
-        const {latitude, longitude, incidents} = this.state;
+        let incidentsMarkup = this.state.incidents ? (
+            this.state.incidents.map(incident => <Incident key={incident.incidentId} incident={incident}/>)) : (
+            <p>Loading...</p>);
         return (
-            <div className={classes.root}>
-                <SideNav/>
-                <main className={classes.content}>
-                    <MapContainer latitude={latitude} longitude={longitude}/>
-                </main>
-            </div>
+            <Grid container spacing={5}>
+                <Grid item sm={2} xs={12}>
+                    <h4 style={{width: '100%', textAlign: 'center'}}>Navigation Menu</h4>
+                </Grid>
+                <Grid item sm={6} xs={12}>
+                    {incidentsMarkup}
+                </Grid>
+                <Grid item sm={4} xs={12}>
+                    <p>Incident Location</p>
+                </Grid>
+            </Grid>
         );
     }
 }
 
-export default withStyles(styles)(dashboard);
+export default dashboard;

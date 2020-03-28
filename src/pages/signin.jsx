@@ -3,13 +3,13 @@ import Container from "@material-ui/core/Container";
 import Avatar from "@material-ui/core/Avatar";
 import Typography from "@material-ui/core/Typography";
 import TextField from "@material-ui/core/TextField";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Checkbox from "@material-ui/core/Checkbox";
 import Button from "@material-ui/core/Button";
-import Grid from "@material-ui/core/Grid";
-import {Link} from "react-router-dom";
 import {LockOutlined} from "@material-ui/icons";
+import PropTypes from 'prop-types';
 import {withStyles} from "@material-ui/core";
+import {connect} from 'react-redux';
+import {loginUser} from "../redux/actions/userActions";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 const styles = theme => ({
     paper: {
@@ -26,46 +26,74 @@ const styles = theme => ({
         width: '100%',
         marginTop: theme.spacing(1),
     },
-    submit: {
+    button: {
         margin: theme.spacing(3, 0, 2),
+        position: 'relative'
     },
+    progress: {
+        position: 'absolute'
+    },
+    customError: {
+        color: 'red',
+        fontSize: "0.8rem",
+        marginTop: 10,
+        textAlign: 'center'
+    }
 });
 
 class signin extends Component {
 
+    constructor(props) {
+        super(props);
+        this.state = {email: '', password: '', errors: {}};
+    }
+
+    componentWillReceiveProps(nextProps, nextContext) {
+        if (nextProps.UI.errors){
+            this.setState({errors: nextProps.UI.errors});
+        }
+    }
+
+    handleSubmit = event => {
+        event.preventDefault();
+        const userData = {email: this.state.email, password: this.state.password};
+        this.props.loginUser(userData, this.props.history)
+    };
+
+    handleChange = event => {
+        this.setState({[event.target.name]: event.target.value, errors: {}})
+    };
+
     render() {
-        const {classes} = this.props;
+        const {classes, UI: {loading}} = this.props;
+        const {email, password, errors} = this.state;
         return (
             <Container component="main" maxWidth="xs">
                 <div className={classes.paper}>
                     <Avatar className={classes.avatar}>
                         <LockOutlined/>
                     </Avatar>
-                    <Typography component="h1" variant="h5">
-                        Sign in
-                    </Typography>
-                    <form className={classes.form} noValidate>
-                        <TextField variant="outlined" margin="normal" required fullWidth id="email"
-                                   label="Email Address" name="email" autoComplete="email" autoFocus/>
+                    <Typography component="h1" variant="h5">Sign in</Typography>
+                    <form className={classes.form} noValidate onSubmit={this.handleSubmit}>
+                        <TextField variant="outlined" margin="normal" required fullWidth id="email" type='email'
+                                   label="Email Address" name="email" value={email} onChange={this.handleChange}
+                                   helperText={errors.email} error={!!errors.email}>
+                        </TextField>
                         <TextField variant="outlined" margin="normal" required fullWidth name="password"
-                            label="Password" type="password" id="password" autoComplete="current-password"/>
-                        <FormControlLabel
-                            control={<Checkbox value="remember" color="primary"/>} label="Remember me"/>
-                        <Button type="submit" fullWidth variant="contained" color="primary" className={classes.submit}>
+                                   value={password} label="Password" type="password" id="password"
+                                   helperText={errors.password} error={!!errors.password}
+                                   autoComplete="current-password"
+                                   onChange={this.handleChange}/>
+                        {errors.general && (
+                            <Typography variant='body2' className={classes.customError}>{errors.general}</Typography>
+                        )}
+                        <Button type="submit" fullWidth variant="contained" color="primary" className={classes.button}
+                                disabled={loading}>
                             Sign In
+                            {loading && (
+                                <CircularProgress size={30} className={classes.progress} color='secondary'/>
+                            )}
                         </Button>
-                        <Grid container>
-                            <Grid item xs>
-                                <Link to={'/'} variant="body2">
-                                    Forgot password?
-                                </Link>
-                            </Grid>
-                            <Grid item>
-                                <Link to={'/'} variant="body2">
-                                    {"Don't have an account? Sign Up"}
-                                </Link>
-                            </Grid>
-                        </Grid>
                     </form>
                 </div>
             </Container>
@@ -73,4 +101,20 @@ class signin extends Component {
     }
 }
 
-export default withStyles(styles)(signin);
+signin.propTypes = {
+    classes: PropTypes.object.isRequired,
+    loginUser: PropTypes.func.isRequired,
+    user: PropTypes.object.isRequired,
+    UI: PropTypes.object.isRequired
+};
+
+const mapStateToProps = state => ({
+    user: state.user,
+    UI: state.UI
+});
+
+const mapActionsToProps = {
+  loginUser
+};
+
+export default connect(mapStateToProps, mapActionsToProps)(withStyles(styles)(signin));

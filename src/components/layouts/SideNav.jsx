@@ -168,7 +168,7 @@ class SideNav extends Component {
                         <Notifications className='iconSpacing'/>
                         <span style={{padding: 20}}>Notifications</span><Badge badgeContent={20} color='secondary'/>
                     </Link>
-                    <Link to={'/dashboard'} className={classes.iconColor}>
+                    <Link to={'/users'} className={classes.iconColor}>
                         <People className='iconSpacing'/>
                         <span style={{padding: 20}}>Users</span>
                     </Link>

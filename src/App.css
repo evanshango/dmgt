@@ -4,13 +4,22 @@ html, body {
   sans-serif;
   background-color: rgb(245, 245, 245);
 }
-
 .container{
-  margin: 50px auto 0 auto;
+  margin: 80px auto 0 auto;
 }
 
 .nav-container {
-  margin-left: auto;
+  margin: auto;
+}
+
+.button-spacing{
+  width: 100%;
+  text-transform: lowercase;
+}
+
+.typography-text{
+  text-transform: none;
+  padding: 8px;
 }
 
 .nav-container svg{
