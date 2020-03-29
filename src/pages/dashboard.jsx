@@ -2,6 +2,13 @@ import React, {Component} from 'react';
 import axios from "axios";
 import Grid from "@material-ui/core/Grid";
 import Incident from "../components/Incident";
+import Profile from "../components/Profile";
+
+const styles = {
+    textTransform: 'uppercase',
+    textAlign: 'center',
+    color: 'red'
+};
 
 class dashboard extends Component {
 
@@ -19,14 +26,16 @@ class dashboard extends Component {
             <p>Loading...</p>);
         return (
             <Grid container spacing={5}>
-                <Grid item sm={2} xs={12}>
-                    <h4 style={{width: '100%', textAlign: 'center'}}>Navigation Menu</h4>
+                <Grid item sm={3} xs={12}>
+                    <h5 style={styles}>Contact Profile</h5>
+                    <Profile/>
                 </Grid>
-                <Grid item sm={6} xs={12}>
+                <Grid item sm={5} xs={12}>
+                    <h5 style={styles}>Reported Incidents</h5>
                     {incidentsMarkup}
                 </Grid>
                 <Grid item sm={4} xs={12}>
-                    <p>Incident Location</p>
+                    <h5 style={styles}>Incident Location</h5>
                 </Grid>
             </Grid>
         );

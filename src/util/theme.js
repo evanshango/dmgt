@@ -14,6 +14,8 @@ export default {
         }
     },
     styling: {
-
+        textField: {
+            marginTop: 10
+        },
     }
 }
