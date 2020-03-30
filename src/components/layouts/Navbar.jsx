@@ -6,11 +6,11 @@ import {Link} from "react-router-dom";
 import {connect} from "react-redux";
 import PropTypes from 'prop-types';
 import {logoutUser} from "../../redux/actions/userActions";
-import AddIcon from '@material-ui/icons/Add';
 import Exit from '@material-ui/icons/ExitToApp';
 import Tooltip from "@material-ui/core/Tooltip";
 import IconButton from "@material-ui/core/IconButton";
 import MenuBookIcon from '@material-ui/icons/MenuBook';
+import AddContact from "../AddContact";
 
 class Navbar extends Component {
 
@@ -27,11 +27,7 @@ class Navbar extends Component {
                         <Fragment>
                             {admin ? (
                                 <Fragment>
-                                    <Tooltip title='Add a new Contact' placement='left-end'>
-                                        <IconButton>
-                                            <AddIcon color='primary'/>
-                                        </IconButton>
-                                    </Tooltip>
+                                    <AddContact/>
                                     <Tooltip title='Logout' placement='right-end'>
                                         <IconButton onClick={this.handleLogout}>
                                             <Exit color='primary'/>

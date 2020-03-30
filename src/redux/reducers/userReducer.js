@@ -1,4 +1,10 @@
-import {SET_USER, SET_AUTHENTICATED, SET_UNAUTHENTICATED, LOADING_USER, DISPATCH_HELP} from "../types";
+import {
+    SET_USER,
+    SET_AUTHENTICATED,
+    SET_UNAUTHENTICATED,
+    LOADING_USER,
+    DISPATCH_HELP,
+} from "../types";
 
 const initialState = {authenticated: false, loading: false, credentials: {}, incidents: []};
 
@@ -13,10 +19,7 @@ export default function (state = initialState, action) {
         case LOADING_USER:
             return {...state, loading: true};
         case DISPATCH_HELP:
-            return {
-                ...state,
-                incidents: state.incidents.filter(incident => incident.incidentId === action.payload.incidentId)
-            };
+            return {...state,};
         default:
             return state;
     }

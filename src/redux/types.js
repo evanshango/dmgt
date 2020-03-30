@@ -8,4 +8,6 @@ export const CLEAR_ERRORS = 'CLEAR_ERRORS';
 export const SET_INCIDENTS = 'SET_INCIDENTS';
 export const LOADING_DATA = 'LOADING_DATA';
 export const DISPATCH_HELP = 'DISPATCH_HELP';
-export const SET_INCIDENT = 'SET_INCIDENT';
+export const ADD_CONTACT = 'ADD_CONTACT';
+export const SET_CONTACTS = 'SET_CONTACTS';
+export const STOP_LOADING_UI = 'STOP_LOADING_UI';

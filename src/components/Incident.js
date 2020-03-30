@@ -7,48 +7,33 @@ import Typography from "@material-ui/core/Typography";
 import {connect} from "react-redux";
 import PropTypes from 'prop-types';
 import {dispatchHelp} from "../redux/actions/dataActions";
-import Button from "@material-ui/core/Button";
+import DispatchHelp from "./DispatchHelp";
 
-const styles = {
-    card: {
-        display: 'flex',
-        marginBottom: 20
-    },
-    image: {
-        minWidth: 150,
-        minHeight: 150,
-        objectFit: 'cover'
-    },
-    categoryStyle: {
-        color: 'green',
-        textTransform: 'uppercase',
-        fontSize: '12px'
-    },
-    categoryTag: {
-        fontSize: '12px'
-    }
-};
+const styles = theme => ({
+    ...theme.styling
+});
 
 class Incident extends Component {
     render() {
-        const {
-            classes, incident: {
-                imageUrl, category, incidentId, description, date, time, geoPoint: {
-                    _latitude, _longitude
-                }
-            }
-        } = this.props;
+        const {classes, user: {authenticated}, incident} = this.props;
+
+        const dispatchHelpButton = authenticated ? (
+            <DispatchHelp incident={incident}/>
+        ) : null;
+
         return (
+            /** @namespace incident.imageUrl **/
             <Card className={classes.card}>
-                <CardMedia image={imageUrl} title='Incident Image' className={classes.image}/>
+                <CardMedia image={incident.imageUrl} title='Incident Image' className={classes.image}/>
                 <CardContent className={classes.content}>
                     <Typography variant='h6'><b className={classes.categoryStyle}>Category :</b>
-                        <span className={classes.categoryTag}><b> {category}</b></span>
+                        <span className={classes.categoryTag}><b> {incident.category}</b></span>
                     </Typography>
+                    {dispatchHelpButton}
                     <br/>
-                    <Typography variant='body2'><b className={classes.categoryStyle}>Date :</b> {date}</Typography>
+                    <Typography variant='body2'><b className={classes.categoryStyle}>Date :</b> {incident.date}</Typography>
                     <br/>
-                    <Typography variant='body1'><b className={classes.categoryStyle}>Description :</b> {description}
+                    <Typography variant='body1'><b className={classes.categoryStyle}>Description :</b> {incident.description}
                     </Typography>
                 </CardContent>
             </Card>
@@ -60,7 +45,7 @@ Incident.propTypes = {
     dispatchHelp: PropTypes.func.isRequired,
     user: PropTypes.object.isRequired,
     incident: PropTypes.object.isRequired,
-    classes: PropTypes.object.isRequired
+    classes: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = state => ({

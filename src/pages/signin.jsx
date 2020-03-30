@@ -49,7 +49,7 @@ class signin extends Component {
     }
 
     componentWillReceiveProps(nextProps, nextContext) {
-        if (nextProps.UI.errors){
+        if (nextProps.UI.errors) {
             this.setState({errors: nextProps.UI.errors});
         }
     }
@@ -81,9 +81,7 @@ class signin extends Component {
                         </TextField>
                         <TextField variant="outlined" margin="normal" required fullWidth name="password"
                                    value={password} label="Password" type="password" id="password"
-                                   helperText={errors.password} error={!!errors.password}
-                                   autoComplete="current-password"
-                                   onChange={this.handleChange}/>
+                                   helperText={errors.password} error={!!errors.password} onChange={this.handleChange}/>
                         {errors.general && (
                             <Typography variant='body2' className={classes.customError}>{errors.general}</Typography>
                         )}
@@ -114,7 +112,7 @@ const mapStateToProps = state => ({
 });
 
 const mapActionsToProps = {
-  loginUser
+    loginUser
 };
 
 export default connect(mapStateToProps, mapActionsToProps)(withStyles(styles)(signin));

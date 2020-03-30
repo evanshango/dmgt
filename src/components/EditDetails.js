@@ -3,8 +3,6 @@ import PropTypes from 'prop-types';
 import {withStyles} from "@material-ui/core";
 import {connect} from "react-redux";
 import {editContactDetails} from "../redux/actions/userActions";
-import Tooltip from "@material-ui/core/Tooltip";
-import IconButton from "@material-ui/core/IconButton";
 import EditIcon from '@material-ui/icons/Edit';
 import Dialog from "@material-ui/core/Dialog";
 import DialogTitle from "@material-ui/core/DialogTitle";

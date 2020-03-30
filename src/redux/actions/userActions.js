@@ -1,5 +1,15 @@
-import {SET_USER, SET_ERRORS, CLEAR_ERRORS, LOADING_UI, SET_UNAUTHENTICATED, LOADING_USER} from "../types";
+import {SET_USER, SET_ERRORS, CLEAR_ERRORS, LOADING_UI, SET_UNAUTHENTICATED, LOADING_USER, ADD_CONTACT} from "../types";
 import axios from "axios";
+
+export const addContact = contactData => dispatch => {
+    dispatch({type: LOADING_UI});
+    axios.post('/new/contact', contactData).then(res => {
+        dispatch({type: ADD_CONTACT, payload: res.data});
+        dispatch({type: CLEAR_ERRORS});
+    }).catch(err => {
+        dispatch({type: SET_ERRORS, payload: err.response.data})
+    })
+};
 
 export const loginUser = (userData, history) => dispatch => {
     dispatch({type: LOADING_UI});
