@@ -12,6 +12,7 @@ import DialogContent from "@material-ui/core/DialogContent";
 import TextField from "@material-ui/core/TextField";
 import DialogActions from "@material-ui/core/DialogActions";
 import Button from "@material-ui/core/Button";
+import MyButton from "../util/MyButton";
 
 const styles = theme => ({
     ...theme.styling,
@@ -62,11 +63,9 @@ class EditDetails extends Component {
         const {open, contactInfo, website, contactNo, location, errors} = this.state;
         return (
             <Fragment>
-                <Tooltip title='Edit Contact Details' placement='top'>
-                    <IconButton onClick={this.handleOpen} className={classes.button}>
-                        <EditIcon color='primary'/>
-                    </IconButton>
-                </Tooltip>
+                <MyButton tip='Edit Contact Details' onClick={this.handleOpen} btnClassName={classes.button}>
+                    <EditIcon color='primary'/>
+                </MyButton>
                 <Dialog open={open} onClose={this.handleClose} fullWidth maxWidth='sm'>
                     <DialogTitle>Edit Contact Details</DialogTitle>
                     <DialogContent>

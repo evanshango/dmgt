@@ -5,3 +5,7 @@ export const LOADING_USER = 'LOADING_USER';
 export const SET_ERRORS = 'SET_ERRORS';
 export const LOADING_UI = 'LOADING_UI';
 export const CLEAR_ERRORS = 'CLEAR_ERRORS';
+export const SET_INCIDENTS = 'SET_INCIDENTS';
+export const LOADING_DATA = 'LOADING_DATA';
+export const DISPATCH_HELP = 'DISPATCH_HELP';
+export const SET_INCIDENT = 'SET_INCIDENT';

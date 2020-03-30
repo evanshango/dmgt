@@ -15,6 +15,27 @@ export const loginUser = (userData, history) => dispatch => {
     })
 };
 
+export const loginAdmin = (adminData, history) => dispatch => {
+    dispatch({type: LOADING_UI});
+    axios.post('/login/admin', adminData).then(res => {
+        const token = `Bearer ${res.data.token}`;
+        localStorage.setItem('token', token);
+        axios.defaults.headers.common['Authorization'] = token;
+        dispatch(getAdminData());
+        dispatch({type: CLEAR_ERRORS});
+        history.push('/');
+    }).catch(err => {
+        dispatch({type: SET_ERRORS, payload: err.response.data})
+    })
+};
+
+export const getAdminData = () => dispatch => {
+    dispatch({type: LOADING_USER});
+    axios.get('/admin').then(res => {
+        dispatch({type: SET_USER, payload: res.data})
+    }).catch(err => console.log(err))
+};
+
 export const getUserData = () => dispatch => {
     dispatch({type: LOADING_USER});
     axios.get('/contact').then(res => {

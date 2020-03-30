@@ -10,12 +10,11 @@ import LinkIcon from "@material-ui/icons/Link";
 import Button from "@material-ui/core/Button";
 import PhoneIcon from '@material-ui/icons/Phone';
 import MuiLink from '@material-ui/core/Link'
-import IconButton from "@material-ui/core/IconButton";
 import EditIcon from '@material-ui/icons/Edit'
-import Tooltip from "@material-ui/core/Tooltip";
 import {uploadImage, logoutUser} from "../redux/actions/userActions";
 import PowerSettingsNewIcon from '@material-ui/icons/PowerSettingsNew';
 import EditDetails from "./EditDetails";
+import MyButton from "../util/MyButton";
 
 const styles = theme => ({
     paper: {padding: 20},
@@ -96,11 +95,9 @@ class Profile extends Component {
                         <img src={imageUrl} alt="Profile" className='profile-image'/>
                         <input type='file' id='imageInput' hidden='hidden'
                                onChange={this.handleImageChange}/>
-                        <Tooltip title='Edit Profile Picture' placement='top-start'>
-                            <IconButton onClick={this.handleEditPicture} className='button'>
-                                <EditIcon color='primary'/>
-                            </IconButton>
-                        </Tooltip>
+                        <MyButton tip='Edit Profile Picture' onClick={this.handleEditPicture} btnClassName='button'>
+                            <EditIcon color='primary'/>
+                        </MyButton>
                     </div>
                     <hr/>
                     <div className="profile-details">
@@ -134,11 +131,9 @@ class Profile extends Component {
                             </Fragment>
                         )}
                     </div>
-                    <Tooltip title='Logout' placement='top'>
-                        <IconButton onClick={this.handleLogout}>
-                            <PowerSettingsNewIcon color='secondary'/>
-                        </IconButton>
-                    </Tooltip>
+                    <MyButton onClick={this.handleLogout} tip='Logout'>
+                        <PowerSettingsNewIcon color='secondary'/>
+                    </MyButton>
                     <EditDetails/>
                 </div>
             </Paper>

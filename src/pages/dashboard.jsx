@@ -1,8 +1,11 @@
-import React, {Component} from 'react';
-import axios from "axios";
+import React, {Component, Fragment} from 'react';
 import Grid from "@material-ui/core/Grid";
 import Incident from "../components/Incident";
 import Profile from "../components/Profile";
+import {connect} from "react-redux";
+import PropTypes from 'prop-types';
+import DashboardAdmin from "../components/DashboardAdmin";
+import {getIncidents} from "../redux/actions/dataActions";
 
 const styles = {
     textTransform: 'uppercase',
@@ -12,34 +15,50 @@ const styles = {
 
 class dashboard extends Component {
 
-    state = {incidents: null};
-
     componentDidMount() {
-        axios.get('/incidents').then(res => {
-            this.setState({incidents: res.data})
-        }).catch(err => console.log(err))
+        this.props.getIncidents();
     }
 
     render() {
-        let incidentsMarkup = this.state.incidents ? (
-            this.state.incidents.map(incident => <Incident key={incident.incidentId} incident={incident}/>)) : (
-            <p>Loading...</p>);
+        const {admin, data: {incidents, loading}} = this.props;
+        let incidentsMarkup = !loading ? (
+                incidents.map(incident => <Incident key={incident.incidentId} incident={incident}/>)) :
+            <p>Loading...</p>;
         return (
-            <Grid container spacing={5}>
-                <Grid item sm={3} xs={12}>
-                    <h5 style={styles}>Contact Profile</h5>
-                    <Profile/>
-                </Grid>
-                <Grid item sm={5} xs={12}>
-                    <h5 style={styles}>Reported Incidents</h5>
-                    {incidentsMarkup}
-                </Grid>
-                <Grid item sm={4} xs={12}>
-                    <h5 style={styles}>Incident Location</h5>
-                </Grid>
-            </Grid>
+            <Fragment>
+                {admin ? (
+                    <DashboardAdmin/>
+                ) : (
+                    <Grid container spacing={5}>
+                        <Grid item sm={3} xs={12}>
+                            <h5 style={styles}>Contact Profile</h5>
+                            <Profile/>
+                        </Grid>
+                        <Grid item sm={5} xs={12}>
+                            <h5 style={styles}>Reported Incidents</h5>
+                            {incidentsMarkup}
+                        </Grid>
+                        <Grid item sm={4} xs={12}>
+                            <h5 style={styles}>Incident Location</h5>
+                        </Grid>
+                    </Grid>
+                )}
+            </Fragment>
         );
     }
 }
 
-export default dashboard;
+dashboard.propTypes = {
+    authenticated: PropTypes.bool.isRequired,
+    admin: PropTypes.bool,
+    getIncidents: PropTypes.func.isRequired,
+    data: PropTypes.object.isRequired
+};
+
+const mapStateToProps = state => ({
+    authenticated: state.user.authenticated,
+    admin: state.user.credentials.admin,
+    data: state.data
+});
+
+export default connect(mapStateToProps, {getIncidents})(dashboard);

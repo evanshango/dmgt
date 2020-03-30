@@ -1,10 +1,6 @@
-import {SET_USER, SET_AUTHENTICATED, SET_UNAUTHENTICATED, LOADING_USER} from "../types";
+import {SET_USER, SET_AUTHENTICATED, SET_UNAUTHENTICATED, LOADING_USER, DISPATCH_HELP} from "../types";
 
-const initialState = {
-  authenticated: false,
-    loading: false,
-  credentials: {}
-};
+const initialState = {authenticated: false, loading: false, credentials: {}, incidents: []};
 
 export default function (state = initialState, action) {
     switch (action.type) {
@@ -13,9 +9,14 @@ export default function (state = initialState, action) {
         case SET_UNAUTHENTICATED:
             return initialState;
         case SET_USER:
-            return {authenticated: true, ...action.payload, loading: false };
+            return {authenticated: true, ...action.payload, loading: false};
         case LOADING_USER:
             return {...state, loading: true};
+        case DISPATCH_HELP:
+            return {
+                ...state,
+                incidents: state.incidents.filter(incident => incident.incidentId === action.payload.incidentId)
+            };
         default:
             return state;
     }
