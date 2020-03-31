@@ -70,10 +70,11 @@ class EditDetails extends Component {
                         <form>
                             <TextField name='contactNo' type='text' label='CONTACT NUMBER' placeholder='Contact Number'
                                        className={classes.textField} value={contactNo} onChange={this.handleChange}
-                                       fullWidth/>
+                                       fullWidth helperText={errors.contactNo} error={!!errors.contactNo}/>
                             <TextField name='contactInfo' type='text' label='CONTACT INFO' fullWidth value={contactInfo}
                                        placeholder='A short description about your organization' multiline rows='5'
-                                       className={classes.textField} onChange={this.handleChange}/>
+                                       className={classes.textField} onChange={this.handleChange}
+                                       helperText={errors.contactInfo} error={!!errors.contactInfo}/>
                             <TextField name='website' type='text' label='WEBSITE' className={classes.textField}
                                        placeholder='Your Organization Website' value={website} fullWidth
                                        onChange={this.handleChange}/>

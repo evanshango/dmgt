@@ -11,6 +11,7 @@ import MyButton from "../util/MyButton";
 import CloseIcon from "@material-ui/icons/Close";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
+import MapContainer from "./map/MapContainer";
 
 const styles = theme => ({
     ...theme.styling,
@@ -34,8 +35,7 @@ class DispatchHelp extends Component {
     };
 
     render() {
-        const {classes, incident: {imageUrl, category, geoPoint: {_latitude, _longitude},
-            description, resolved, time}} = this.props;
+        const {classes, incident} = this.props;
         const {open} = this.state;
         return (
             <Fragment>
@@ -49,20 +49,25 @@ class DispatchHelp extends Component {
                     <DialogContent className={classes.dialogContent}>
                         <Grid container>
                             <Grid item sm={4}>
-                                <img src={imageUrl} alt="IncidentImage" className={classes.incidentImage}/>
+                                <img src={incident.imageUrl} alt="IncidentImage" className={classes.incidentImage}/>
                             </Grid>
                             <Grid item sm={8}>
-                                <Typography variant='body1'>Category: {category}</Typography>
+                                <Typography variant='body1'>Category: {incident.category}</Typography>
                                 <hr className={classes.invisibleSeparator}/>
                                 <Typography variant='body2' color='textSecondary'>
-                                    GeoPoints: <b>Lat:</b> {_latitude} <b>Lng:</b> {_longitude}
+                                    GeoPoints: <b>Lat:</b> {incident.geoPoint._latitude}
+                                    <b>Lng:</b> {incident.geoPoint._longitude}
                                 </Typography>
                                 <hr className={classes.invisibleSeparator}/>
-                                <Typography variant='body1'>Time: {time}</Typography>
+                                <Typography variant='body1'>Time: {incident.time}</Typography>
                                 <hr className={classes.invisibleSeparator}/>
-                                <Typography variant='body1'>Description: {description}</Typography>
+                                <Typography variant='body1'>Description: {incident.description}</Typography>
                             </Grid>
                             <hr className={classes.invisibleSeparator}/>
+                            <Grid item sm={12} style={{width: '100%'}}>
+                                {/*<MapContainer latitude={_latitude} longitude={_longitude}/>*/}
+                                <MapContainer incident={incident}/>
+                            </Grid>
                             <Grid item sm={12} style={{textAlign: 'center'}}>
                                 <Button variant='contained' className={classes.button} onClick={this.dispatchHelp}
                                         color='primary'>OK

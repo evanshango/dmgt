@@ -56,6 +56,7 @@ export default {
             minWidth: 150,
             height: 150,
             borderRadius: '50%',
+            border: '1px solid grey',
             objectFit: 'cover'
         },
         invisibleSeparator: {

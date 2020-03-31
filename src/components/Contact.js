@@ -4,7 +4,6 @@ import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import Card from "@material-ui/core/Card";
 import {withStyles} from "@material-ui/core";
-import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
 import DeleteContact from "./DeleteContact";
 import PropTypes from 'prop-types';
 import {connect} from "react-redux";

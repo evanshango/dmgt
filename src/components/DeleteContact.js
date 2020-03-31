@@ -1,7 +1,6 @@
 import React, {Component, Fragment} from 'react';
 import MyButton from "../util/MyButton";
 import Dialog from "@material-ui/core/Dialog";
-import DialogTitle from "@material-ui/core/DialogTitle";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogActions from "@material-ui/core/DialogActions";
 import Button from "@material-ui/core/Button";
@@ -27,7 +26,7 @@ class DeleteContact extends Component {
     };
 
     render() {
-        const {classes, contact} = this.props;
+        const {classes} = this.props;
         const {open} = this.state;
         return (
             <Fragment>
