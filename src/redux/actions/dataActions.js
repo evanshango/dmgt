@@ -1,5 +1,12 @@
 import {
-    CLEAR_ERRORS, DISPATCH_HELP, LOADING_DATA, LOADING_UI, SET_CONTACTS, SET_INCIDENTS, STOP_LOADING_UI
+    CLEAR_ERRORS,
+    DISPATCH_HELP,
+    LOADING_DATA,
+    LOADING_UI,
+    SET_CONTACTS,
+    SET_GENERAL_INFO,
+    SET_INCIDENTS,
+    STOP_LOADING_UI
 } from "../types";
 import axios from 'axios';
 
@@ -11,6 +18,16 @@ export const getIncidents = () => dispatch => {
         console.log(err);
         dispatch({type: SET_INCIDENTS, payload: []})
     })
+};
+
+export const getGeneralInfo = () => dispatch => {
+  dispatch({type: LOADING_DATA});
+  axios.get('/general').then(res => {
+      dispatch({type: SET_GENERAL_INFO, payload: res.data})
+  }).catch(err => {
+      console.log(err);
+      dispatch({type: SET_GENERAL_INFO, payload: []})
+  })
 };
 
 export const dispatchHelp = incidentId => dispatch => {

@@ -3,7 +3,6 @@ import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
 import './App.css';
 import dashboard from "./pages/dashboard";
 import signin from "./pages/signin";
-import signup from "./pages/signup";
 import createMuiTheme from "@material-ui/core/styles/createMuiTheme";
 import {ThemeProvider as MuiThemeProvider} from '@material-ui/core/styles';
 import User from "./components/User";
@@ -48,7 +47,6 @@ class App extends Component {
                                 <Route exact path='/' component={dashboard}/>
                                 <AuthRoute exact path='/signin' component={signin}/>
                                 <AuthRoute exact path='/login/admin' component={admin}/>
-                                <Route exact path='/signup' component={signup}/>
                                 <Route exact path='/users' component={User}/>
                             </Switch>
                         </div>

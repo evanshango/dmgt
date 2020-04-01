@@ -31,9 +31,12 @@ class Incident extends Component {
                     </Typography>
                     {dispatchHelpButton}
                     <br/>
-                    <Typography variant='body2'><b className={classes.categoryStyle}>Date :</b> {incident.date}</Typography>
+                    <Typography variant='body2'><b className={classes.categoryStyle}>Date :</b>
+                        {incident.date}
+                    </Typography>
                     <br/>
-                    <Typography variant='body1'><b className={classes.categoryStyle}>Description :</b> {incident.description}
+                    <Typography variant='body1'><b className={classes.categoryStyle}>Description :</b>
+                        {incident.description}
                     </Typography>
                 </CardContent>
             </Card>

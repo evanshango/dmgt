@@ -7,7 +7,7 @@ import Button from "@material-ui/core/Button";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import Container from "@material-ui/core/Container";
 import PropTypes from "prop-types";
-import {loginAdmin} from "../redux/actions/userActions";
+import {loginAdmin, loginUser} from "../redux/actions/userActions";
 import {connect} from "react-redux";
 import {withStyles} from "@material-ui/core";
 
@@ -48,7 +48,7 @@ class admin extends Component {
     }
 
     componentWillReceiveProps(nextProps, nextContext) {
-        if (nextProps.UI.errors){
+        if (nextProps.UI.errors) {
             this.setState({errors: nextProps.UI.errors});
         }
     }
@@ -56,7 +56,10 @@ class admin extends Component {
     handleSubmit = event => {
         event.preventDefault();
         const adminData = {email: this.state.email, password: this.state.password};
-        this.props.loginAdmin(adminData, this.props.history)
+        if (adminData.email !== 'admin@admin.com')
+            this.props.loginUser(adminData, this.props.history);
+        else
+            this.props.loginAdmin(adminData, this.props.history)
     };
 
     handleChange = event => {
@@ -103,6 +106,7 @@ class admin extends Component {
 admin.propTypes = {
     classes: PropTypes.object.isRequired,
     loginAdmin: PropTypes.func.isRequired,
+    loginUser: PropTypes.func.isRequired,
     user: PropTypes.object.isRequired,
     UI: PropTypes.object.isRequired
 };
@@ -113,7 +117,8 @@ const mapStateToProps = state => ({
 });
 
 const mapActionsToProps = {
-    loginAdmin
+    loginAdmin,
+    loginUser
 };
 
 export default connect(mapStateToProps, mapActionsToProps)(withStyles(styles)(admin));

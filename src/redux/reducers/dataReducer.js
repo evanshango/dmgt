@@ -1,7 +1,7 @@
-import {ADD_CONTACT, DISPATCH_HELP, LOADING_DATA, SET_CONTACTS, SET_INCIDENTS} from "../types";
+import {ADD_CONTACT, DISPATCH_HELP, LOADING_DATA, SET_CONTACTS, SET_GENERAL_INFO, SET_INCIDENTS} from "../types";
 
-const initialState = {incidents: [], loading: false, contact: {}, contacts: []};
-
+const initialState = {incidents: [], loading: false, contact: {}, contacts: [], generalInfo: []};
+/** @namespace incident.incidentId **/
 export default function (state = initialState, action) {
     switch (action.type) {
         case LOADING_DATA:
@@ -9,7 +9,6 @@ export default function (state = initialState, action) {
         case SET_INCIDENTS:
             return {...state, incidents: action.payload, loading: false};
         case DISPATCH_HELP:
-            /** @namespace incident.incidentId **/
             let index = state.incidents.findIndex(incident => incident.incidentId === action.payload.incidentId);
             state.incidents.splice(index, 1);
             return {...state};
@@ -22,6 +21,8 @@ export default function (state = initialState, action) {
             };
         case SET_CONTACTS:
             return {...state, contacts: action.payload, loading: false};
+        case SET_GENERAL_INFO:
+            return {...state, generalInfo: action.payload, loading: false};
         default:
             return state
     }

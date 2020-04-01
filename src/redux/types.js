@@ -11,3 +11,4 @@ export const DISPATCH_HELP = 'DISPATCH_HELP';
 export const ADD_CONTACT = 'ADD_CONTACT';
 export const SET_CONTACTS = 'SET_CONTACTS';
 export const STOP_LOADING_UI = 'STOP_LOADING_UI';
+export const SET_GENERAL_INFO = 'SET_GENERAL_INFO';

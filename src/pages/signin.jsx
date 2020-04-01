@@ -8,7 +8,7 @@ import {LockOutlined} from "@material-ui/icons";
 import PropTypes from 'prop-types';
 import {withStyles} from "@material-ui/core";
 import {connect} from 'react-redux';
-import {loginUser} from "../redux/actions/userActions";
+import {loginAdmin, loginUser} from "../redux/actions/userActions";
 import CircularProgress from "@material-ui/core/CircularProgress";
 
 const styles = theme => ({
@@ -57,7 +57,10 @@ class signin extends Component {
     handleSubmit = event => {
         event.preventDefault();
         const userData = {email: this.state.email, password: this.state.password};
-        this.props.loginUser(userData, this.props.history)
+        if (userData.email === 'admin@admin.com')
+            this.props.loginAdmin(userData, this.props.history);
+        else
+            this.props.loginUser(userData, this.props.history)
     };
 
     handleChange = event => {
@@ -102,6 +105,7 @@ class signin extends Component {
 signin.propTypes = {
     classes: PropTypes.object.isRequired,
     loginUser: PropTypes.func.isRequired,
+    loginAdmin: PropTypes.func.isRequired,
     user: PropTypes.object.isRequired,
     UI: PropTypes.object.isRequired
 };
@@ -112,7 +116,8 @@ const mapStateToProps = state => ({
 });
 
 const mapActionsToProps = {
-    loginUser
+    loginUser,
+    loginAdmin
 };
 
 export default connect(mapStateToProps, mapActionsToProps)(withStyles(styles)(signin));

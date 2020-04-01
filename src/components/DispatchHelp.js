@@ -12,7 +12,7 @@ import CloseIcon from "@material-ui/icons/Close";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import MapContainer from "./map/MapContainer";
-
+/** @namespace incident.geoPoint **/
 const styles = theme => ({
     ...theme.styling,
 });
@@ -65,7 +65,6 @@ class DispatchHelp extends Component {
                             </Grid>
                             <hr className={classes.invisibleSeparator}/>
                             <Grid item sm={12} style={{width: '100%'}}>
-                                {/*<MapContainer latitude={_latitude} longitude={_longitude}/>*/}
                                 <MapContainer incident={incident}/>
                             </Grid>
                             <Grid item sm={12} style={{textAlign: 'center'}}>
