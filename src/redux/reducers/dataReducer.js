@@ -1,6 +1,20 @@
-import {ADD_CONTACT, DISPATCH_HELP, LOADING_DATA, SET_CONTACTS, SET_GENERAL_INFO, SET_INCIDENTS} from "../types";
+import {
+    ADD_CONTACT,
+    DISPATCH_HELP,
+    LOADING_DATA,
+    SET_ADDITIONAL_INFO,
+    SET_CONTACTS,
+    SET_GENERAL_INFO,
+    SET_INCIDENTS
+} from "../types";
 
-const initialState = {incidents: [], loading: false, contact: {}, contacts: [], generalInfo: []};
+const initialState = {
+    incidents: [],
+    loading: false,
+    contact: {},
+    contacts: [],
+    generalInfo: [],
+};
 /** @namespace incident.incidentId **/
 export default function (state = initialState, action) {
     switch (action.type) {
@@ -13,16 +27,13 @@ export default function (state = initialState, action) {
             state.incidents.splice(index, 1);
             return {...state};
         case ADD_CONTACT:
-            return {
-                ...state, contacts: [
-                    action.payload,
-                    ...state.contacts
-                ]
-            };
+            return {...state, contacts: [action.payload, ...state.contacts]};
         case SET_CONTACTS:
             return {...state, contacts: action.payload, loading: false};
         case SET_GENERAL_INFO:
             return {...state, generalInfo: action.payload, loading: false};
+        case SET_ADDITIONAL_INFO:
+            return {...state, singleItemInfo:action.payload, loading: false};
         default:
             return state
     }

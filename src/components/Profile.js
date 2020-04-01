@@ -121,7 +121,7 @@ class Profile extends Component {
                         </div>
                         <hr/>
                         {contactInfo &&
-                        <Typography variant='body2' style={{textAlign: 'justify'}}>{contactInfo}</Typography>}
+                        <Typography variant='body2' className={classes.justifyText}>{contactInfo}</Typography>}
                         <hr/>
                         {website && (
                             <Fragment>

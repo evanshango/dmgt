@@ -2,7 +2,7 @@ import {
     CLEAR_ERRORS,
     DISPATCH_HELP,
     LOADING_DATA,
-    LOADING_UI,
+    LOADING_UI, SET_ADDITIONAL_INFO,
     SET_CONTACTS,
     SET_GENERAL_INFO,
     SET_INCIDENTS,
@@ -52,4 +52,13 @@ export const getContacts = () => dispatch => {
 
 export const clearErrors = () => dispatch => {
   dispatch({type: CLEAR_ERRORS})
+};
+
+export const getAdditionalItemInfo = infoId => dispatch => {
+  axios.get(`/general/${infoId}`).then(res => {
+      dispatch({type: SET_ADDITIONAL_INFO, payload: res.data})
+  }).catch(err => {
+      console.log(err);
+      dispatch({type: SET_ADDITIONAL_INFO, payload: []})
+  })
 };

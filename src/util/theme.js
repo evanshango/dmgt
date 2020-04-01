@@ -70,5 +70,15 @@ export default {
             marginTop: 20,
             position: 'relative'
         },
+        justifyText: {
+            textAlign: 'justify'
+        },
+        centerText: {
+            textAlign: 'center'
+        },
+        spinnerDiv: {
+            textAlign: 'center',
+            margin: 50
+        }
     }
 }

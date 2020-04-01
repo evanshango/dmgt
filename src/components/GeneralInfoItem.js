@@ -43,6 +43,7 @@ class GeneralInfoItem extends Component {
                     <Typography variant='body2'><b className={classes.categoryStyle}>Item : </b>
                         {info.infoType}
                     </Typography>
+                    {/*<p>{info.infoId}</p>*/}
                     {authenticated && (
                         <Fragment>
                             <MyButton onClick={this.handleOpen} tip='View Details' btnClassName={classes.buttonMore}>
@@ -54,7 +55,7 @@ class GeneralInfoItem extends Component {
                                 </MyButton>
                                 <DialogTitle>{info.infoType}</DialogTitle>
                                 <DialogContent>
-                                    <ViewDetails infoId={info.infoId}/>
+                                    <ViewDetails infoId={info.infoId} infoType={info.infoType}/>
                                 </DialogContent>
                             </Dialog>
                         </Fragment>
@@ -68,11 +69,11 @@ class GeneralInfoItem extends Component {
 GeneralInfoItem.propTypes = {
     classes: PropTypes.object.isRequired,
     info: PropTypes.object.isRequired,
-    authenticated: PropTypes.bool.isRequired
+    authenticated: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = state => ({
-    authenticated: state.user.authenticated
+    authenticated: state.user.authenticated,
 });
 
 export default connect(mapStateToProps)(withStyles(styles)(GeneralInfoItem));
