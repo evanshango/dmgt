@@ -69,7 +69,7 @@ class DispatchHelp extends Component {
                             </Grid>
                             <Grid item sm={12} style={{textAlign: 'center'}}>
                                 <Button variant='contained' className={classes.button} onClick={this.dispatchHelp}
-                                        color='primary'>OK
+                                        color='primary'>Dispatch Help
                                 </Button>
                             </Grid>
                         </Grid>

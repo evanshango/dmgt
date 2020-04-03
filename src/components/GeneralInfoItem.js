@@ -12,13 +12,19 @@ import Dialog from "@material-ui/core/Dialog";
 import CloseIcon from "@material-ui/icons/Close";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import DialogContent from "@material-ui/core/DialogContent";
+import AddGeneralInfo from "./AddGeneralInfo";
+
 /**@namespace info.infoType **/
 const styles = theme => ({
     ...theme.styling,
-    buttonMore : {
+    buttonMore: {
         left: '85%',
         position: 'absolute',
-        top: '10%'
+    },
+    typographyText: {
+        textTransform: 'uppercase',
+        position: 'absolute',
+        left: '30%'
     }
 });
 
@@ -40,26 +46,31 @@ class GeneralInfoItem extends Component {
         return (
             <Card className={classes.card}>
                 <CardContent classes={classes.content}>
-                    <Typography variant='body2'><b className={classes.categoryStyle}>Item : </b>
-                        {info.infoType}
-                    </Typography>
-                    {/*<p>{info.infoId}</p>*/}
-                    {authenticated && (
-                        <Fragment>
-                            <MyButton onClick={this.handleOpen} tip='View Details' btnClassName={classes.buttonMore}>
-                                <UnfoldMoreIcon />
-                            </MyButton>
-                            <Dialog open={open} onClose={this.handleClose} fullWidth maxWidth='sm'>
-                                <MyButton onClick={this.handleClose} tip='Close' tipClassName={classes.closeButton}>
-                                    <CloseIcon/>
+                    <div style={{display: 'flex', alignItems: 'center'}}>
+                        {authenticated && (
+                            <AddGeneralInfo info={info}/>
+                        )}
+                        <Typography variant='body2' className={classes.typographyText}>
+                            {info.infoType}
+                        </Typography>
+                        {authenticated && (
+                            <Fragment>
+                                <MyButton onClick={this.handleOpen} tip='View Details'
+                                          btnClassName={classes.buttonMore}>
+                                    <UnfoldMoreIcon/>
                                 </MyButton>
-                                <DialogTitle>{info.infoType}</DialogTitle>
-                                <DialogContent>
-                                    <ViewDetails infoId={info.infoId} infoType={info.infoType}/>
-                                </DialogContent>
-                            </Dialog>
-                        </Fragment>
-                    )}
+                                <Dialog open={open} onClose={this.handleClose} fullWidth maxWidth='sm'>
+                                    <MyButton onClick={this.handleClose} tip='Close' tipClassName={classes.closeButton}>
+                                        <CloseIcon/>
+                                    </MyButton>
+                                    <DialogTitle>{info.infoType}</DialogTitle>
+                                    <DialogContent>
+                                        <ViewDetails infoId={info.infoId} infoType={info.infoType}/>
+                                    </DialogContent>
+                                </Dialog>
+                            </Fragment>
+                        )}
+                    </div>
                 </CardContent>
             </Card>
         );

@@ -26,7 +26,7 @@ class AddContact extends Component {
             this.setState({errors: nextProps.UI.errors});
         }
         if (!nextProps.UI.errors && !nextProps.UI.loading){
-            this.setState({contactEmail: '', contactName: '', contactNo: '', password: '', open: false, error: {}});
+            this.setState({contactEmail: '', contactName: '', contactNo: '', password: '', open: false, errors: {}});
         }
     }
 

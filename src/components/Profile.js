@@ -161,7 +161,7 @@ Profile.propTypes = {
 };
 
 const mapStateToProps = state => ({
-    user: state.user
+    user: state.user,
 });
 
 const mapActionsToProps = {

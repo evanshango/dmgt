@@ -9,7 +9,6 @@ import {logoutUser} from "../../redux/actions/userActions";
 import Exit from '@material-ui/icons/ExitToApp';
 import Tooltip from "@material-ui/core/Tooltip";
 import IconButton from "@material-ui/core/IconButton";
-import MenuBookIcon from '@material-ui/icons/MenuBook';
 import AddContact from "../AddContact";
 
 class Navbar extends Component {
@@ -34,13 +33,7 @@ class Navbar extends Component {
                                         </IconButton>
                                     </Tooltip>
                                 </Fragment>
-                            ) : (
-                                <Tooltip title='Educational Information' placement='right-end'>
-                                    <IconButton onClick={this.handleLogout}>
-                                        <MenuBookIcon color='primary'/>
-                                    </IconButton>
-                                </Tooltip>
-                            )}
+                            ) : null}
                         </Fragment>
                     ) : (
                         <Fragment>

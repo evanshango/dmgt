@@ -1,9 +1,10 @@
 import {
+    ADD_GENERAL_INFO,
     CLEAR_ERRORS,
     DISPATCH_HELP,
     LOADING_DATA,
     LOADING_UI, SET_ADDITIONAL_INFO,
-    SET_CONTACTS,
+    SET_CONTACTS, SET_ERRORS,
     SET_GENERAL_INFO,
     SET_INCIDENTS,
     STOP_LOADING_UI
@@ -61,4 +62,14 @@ export const getAdditionalItemInfo = infoId => dispatch => {
       console.log(err);
       dispatch({type: SET_ADDITIONAL_INFO, payload: []})
   })
+};
+
+export const addContentInfo = (data, infoId) => dispatch => {
+    dispatch({type: LOADING_UI});
+    axios.post(`/new/${infoId}/content`, data).then(res => {
+        dispatch({type: ADD_GENERAL_INFO, payload: res.data});
+        dispatch({type: CLEAR_ERRORS});
+    }).catch(err => {
+        dispatch({type: SET_ERRORS, payload: err.response.data})
+    })
 };

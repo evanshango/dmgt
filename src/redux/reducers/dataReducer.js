@@ -1,5 +1,5 @@
 import {
-    ADD_CONTACT,
+    ADD_CONTACT, ADD_GENERAL_INFO,
     DISPATCH_HELP,
     LOADING_DATA,
     SET_ADDITIONAL_INFO,
@@ -34,6 +34,8 @@ export default function (state = initialState, action) {
             return {...state, generalInfo: action.payload, loading: false};
         case SET_ADDITIONAL_INFO:
             return {...state, singleItemInfo:action.payload, loading: false};
+        case ADD_GENERAL_INFO:
+            return {...state};
         default:
             return state
     }

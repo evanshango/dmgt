@@ -79,6 +79,10 @@ export default {
         spinnerDiv: {
             textAlign: 'center',
             margin: 50
+        },
+        gridContent: {
+            padding: 8,
+            alignItems: 'center'
         }
     }
 }

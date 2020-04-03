@@ -11,10 +11,6 @@ import EditIcon from "@material-ui/icons/Edit";
 
 const styles = theme => ({
     ...theme.styling,
-    gridContent: {
-        padding: 8,
-        alignItems: 'center'
-    }
 });
 
 class ViewDetails extends Component {

@@ -5,8 +5,6 @@ import dashboard from "./pages/dashboard";
 import signin from "./pages/signin";
 import createMuiTheme from "@material-ui/core/styles/createMuiTheme";
 import {ThemeProvider as MuiThemeProvider} from '@material-ui/core/styles';
-import User from "./components/User";
-import Navbar from "./components/layouts/Navbar";
 import themeFile from "./util/theme";
 import jwtDecode from 'jwt-decode';
 import AuthRoute from './util/AuthRoute'
@@ -16,6 +14,7 @@ import {SET_AUTHENTICATED} from "./redux/types";
 import {logoutUser, getUserData, getAdminData} from "./redux/actions/userActions";
 import axios from 'axios';
 import admin from "./pages/admin";
+import Navbar from "./components/layouts/Navbar";
 
 const theme = createMuiTheme(themeFile);
 const token = localStorage.token;
@@ -47,7 +46,6 @@ class App extends Component {
                                 <Route exact path='/' component={dashboard}/>
                                 <AuthRoute exact path='/signin' component={signin}/>
                                 <AuthRoute exact path='/login/admin' component={admin}/>
-                                <Route exact path='/users' component={User}/>
                             </Switch>
                         </div>
                     </Router>
