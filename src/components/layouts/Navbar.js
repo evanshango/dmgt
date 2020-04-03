@@ -33,7 +33,13 @@ class Navbar extends Component {
                                         </IconButton>
                                     </Tooltip>
                                 </Fragment>
-                            ) : null}
+                            ) : (
+                                <Tooltip title='Logout' placement='right-end'>
+                                    <IconButton onClick={this.handleLogout}>
+                                        <Exit color='primary'/>
+                                    </IconButton>
+                                </Tooltip>
+                            )}
                         </Fragment>
                     ) : (
                         <Fragment>
